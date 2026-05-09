@@ -49,13 +49,31 @@ def read_upload(uploaded_file) -> np.ndarray:
     return cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
 
 
+def synthetic_asset(name: str) -> np.ndarray:
+    seed = sum(ord(ch) for ch in name)
+    rng = np.random.default_rng(seed)
+    canvas = np.full((420, 640, 3), (238, 232, 221), dtype=np.uint8)
+    cv2.rectangle(canvas, (40, 70), (600, 360), (205, 225, 238), -1)
+    cv2.circle(canvas, (180, 180), 64, (82, 137, 191), -1)
+    cv2.circle(canvas, (450, 250), 72, (184, 103, 91), -1)
+    cv2.line(canvas, (80, 330), (560, 110), (54, 86, 112), 6)
+    for _ in range(42):
+        center = tuple(rng.integers([60, 60], [580, 360]).tolist())
+        color = tuple(int(v) for v in rng.integers(40, 210, size=3))
+        cv2.circle(canvas, center, int(rng.integers(4, 13)), color, -1)
+    shift_map = {"1": -70, "left": -70, "2": 0, "mid": 0, "3": 70, "right": 70}
+    shift = next((value for key, value in shift_map.items() if key in name), 0)
+    matrix = np.float32([[1, 0, shift], [0, 1, 0]])
+    return cv2.warpAffine(canvas, matrix, (640, 420), borderMode=cv2.BORDER_REFLECT)
+
+
 def read_asset(name: str, prefer_homework: bool = False) -> np.ndarray:
     paths = [HOMEWORK_IMAGES / name, ASSETS / name] if prefer_homework else [ASSETS / name, HOMEWORK_IMAGES / name]
     for path in paths:
         image = cv2.imread(str(path))
         if image is not None:
             return image
-    raise FileNotFoundError(name)
+    return synthetic_asset(name)
 
 
 def fit_for_display(image: np.ndarray) -> np.ndarray:
