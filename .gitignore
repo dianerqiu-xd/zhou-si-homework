@@ -1,0 +1,20 @@
+.DS_Store
+.idea/
+.mplcache/
+.venv/
+__pycache__/
+*.py[cod]
+*.log
+.streamlit/secrets.toml
+
+# Keep the GitHub repo light enough for Streamlit Cloud deployment.
+a5/数据集/
+**/raw/
+**/outputs/
+**/reports/
+**/screenshots/
+
+# Local-only helper files
+a3/.mplconfig/
+streamlit-homework-builder/
+周四作业清单.docx

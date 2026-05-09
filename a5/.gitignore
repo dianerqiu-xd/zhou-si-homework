@@ -1,0 +1,9 @@
+.DS_Store
+__pycache__/
+*.pyc
+
+# Local datasets are too large for GitHub. Recreate them with:
+# python3 prepare_hog_bow_dataset.py
+# python3 prepare_cnn_resnet_datasets.py
+数据集/
+raw/

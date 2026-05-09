@@ -1,0 +1,3 @@
+A8: 实现 Autoencoder 与 VAE 的重构对比；展示输入图像、Autoencoder 重构结果、VAE 重构结果、重构误差热力图和 loss 曲线；提供二维潜空间散点图，允许选择潜空间位置生成图像和两样本潜空间插值；展示 GAN/扩散模型与文本提示参数实验，包含噪声、判别器分数、生成样本网格，以及 prompt、negative prompt、采样步数、seed、guidance scale 的参数对比；实现成桌面 app 或 web 应用，具有交互操作；提交 PDF 实验报告、prompt 文本、截图、小结、核心源码 py 文件，并列出使用的 Agent 或 LLM。
+
+使用的 Agent/LLM：Codex GPT-5
